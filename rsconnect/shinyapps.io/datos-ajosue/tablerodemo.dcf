@@ -1,0 +1,10 @@
+name: tablerodemo
+title: tablerodemo
+username: datos-ajosue
+account: datos-ajosue
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9877112
+bundleId: 7732573
+url: https://datos-ajosue.shinyapps.io/tablerodemo/
+version: 1
