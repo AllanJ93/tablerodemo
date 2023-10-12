@@ -26,21 +26,21 @@ mod_reservaciones_ui <- function(id){
                 fluidRow(
                   column(
                     width = 4,
-                    textInput(inputId = ns("nombre_entrada"), label = h3("Nombre"), value = ""),
+                    textInput(inputId = ns("nombre_input"), label = h3("Nombre"), value = ""),
                     hr(),
-                    verbatimTextOutput(outputId = ns("nombre_salida"))
+                    verbatimTextOutput(outputId = ns("nombre_output"))
                   ),
                   column(
                     width = 4,
-                    textInput(inputId = ns("apellidoPa_entrada"), label = h3("Apellido Paterno"), value = ""),
+                    textInput(inputId = ns("apellidoPa_input"), label = h3("Apellido Paterno"), value = ""),
                     hr(),
-                    verbatimTextOutput(outputId = ns("apellidoPa_salida")),
+                    verbatimTextOutput(outputId = ns("apellidoPa_output")),
                   ),
                   column(
                     width = 4,
-                    textInput(inputId = ns("apellidoMa_entrada"), label = h3("Apellido Materno"), value = ""),
+                    textInput(inputId = ns("apellidoMa_input"), label = h3("Apellido Materno"), value = ""),
                     hr(),
-                    verbatimTextOutput(outputId = ns("apellidoMa_salida"))
+                    verbatimTextOutput(outputId = ns("apellidoMa_output"))
                   )
                 )
               ),
@@ -48,26 +48,26 @@ mod_reservaciones_ui <- function(id){
             fluidRow(
               column(
                 width = 3,
-                numericInput(inputId = ns("pasajerosAdultos_entrada"), label = h3("Pasajeros adultos"), value = 0, min = 0),
+                numericInput(inputId = ns("pasajerosAdultos_input"), label = h3("Pasajeros adultos"), value = 0, min = 0),
                 hr(),
-                verbatimTextOutput(outputId = ns("pasajerosAdultos_salida")),
+                verbatimTextOutput(outputId = ns("pasajerosAdultos_output")),
               ),
               column(
                 width = 3,
-                numericInput(inputId = ns("pasajerosMenores_entrada"), label = h3("Pasajeros menores"), value = 0, min = 0),
+                numericInput(inputId = ns("pasajerosMenores_input"), label = h3("Pasajeros menores"), value = 0, min = 0),
                 hr(),
-                verbatimTextOutput(outputId = ns("pasajerosMenores_salida")),
+                verbatimTextOutput(outputId = ns("pasajerosMenores_output")),
               ),
               column(
                 width = 3,
-                numericInput(inputId = ns("pasajerosInfantes_entrada"), label = h3("Pasajeros infantes"), value = 0, min = 0),
+                numericInput(inputId = ns("pasajerosInfantes_input"), label = h3("Pasajeros infantes"), value = 0, min = 0),
                 hr(),
-                verbatimTextOutput(outputId = ns("pasajerosInfantes_salida")),
+                verbatimTextOutput(outputId = ns("pasajerosInfantes_output")),
               ),
               column(
                 width = 3,
                 h3("Pasajeros totales"),
-                verbatimTextOutput(outputId = ns("pasajerosTotales_salida")),
+                verbatimTextOutput(outputId = ns("pasajerosTotales_output")),
               )
             ),
             fluidRow(
@@ -77,15 +77,15 @@ mod_reservaciones_ui <- function(id){
                 fluidRow(
                   column(
                     width = 4,
-                    textInput(inputId = ns("agencia_entrada"), label = h3("Agencia"), value = ""),
+                    textInput(inputId = ns("agencia_input"), label = h3("Agencia"), value = ""),
                     hr(),
-                    verbatimTextOutput(outputId = ns("agencia_salida"))
+                    verbatimTextOutput(outputId = ns("agencia_output"))
                   ),
                   column(
                     width = 4,
-                    textInput(inputId = ns("agente_entrada"), label = h3("Agente"), value = ""),
+                    textInput(inputId = ns("agente_input"), label = h3("Agente"), value = ""),
                     hr(),
-                    verbatimTextOutput(outputId = ns("agente_salida"))
+                    verbatimTextOutput(outputId = ns("agente_output"))
                   )
                 )
               )
@@ -97,15 +97,15 @@ mod_reservaciones_ui <- function(id){
                 fluidRow(
                   column(
                     width = 3,
-                    dateInput(inputId = ns("fechaIn_entrada"), label = h3("Fecha-In"), value = lubridate::today()),
+                    dateInput(inputId = ns("fechaIn_input"), label = h3("Fecha-In"), value = lubridate::today()),
                     hr(),
-                    verbatimTextOutput(outputId = ns("fechaIn_salida"))
+                    verbatimTextOutput(outputId = ns("fechaIn_output"))
                   ),
                   column(
                     width = 3,
-                    dateInput(inputId = ns("fechaOut_entrada"), label = h3("Fecha-Out"), value = lubridate::today() + lubridate::days(1)),
+                    uiOutput(outputId = ns("fechaOutAux_output")),
                     hr(),
-                    verbatimTextOutput(outputId = ns("fechaOut_salida"))
+                    verbatimTextOutput(outputId = ns("fechaOut_output"))
                   )
                 )
               )
@@ -117,43 +117,50 @@ mod_reservaciones_ui <- function(id){
                 fluidRow(
                   column(
                     width = 3,
-                    dateInput(inputId = ns("vueloFechaIn_entrada"), label = h3("Vuelo-In Fecha"), value = lubridate::today()),
+                    dateInput(inputId = ns("vueloFechaIn_input"), label = h3("Vuelo-In Fecha"), value = lubridate::today()),
                     hr(),
-                    verbatimTextOutput(outputId = ns("vueloFechaIn_salida"))
+                    verbatimTextOutput(outputId = ns("vueloFechaIn_output"))
                   ),
                   column(
                     width = 3,
-                    textInput(inputId = ns("vueloHorarioIn_entrada"), label = h3("Vuelo-In Horario"), value = ""),
+                    textInput(inputId = ns("vueloHorarioIn_input"), label = h3("Vuelo-In Horario"), value = ""),
                     hr(),
-                    verbatimTextOutput(outputId = ns("vueloHorarioIn_salida"))
+                    verbatimTextOutput(outputId = ns("vueloHorarioIn_output"))
                   ),
                   column(
                     width = 3,
-                    textInput(inputId = ns("vueloClaveIn_entrada"), label = h3("Vuelo-In Clave"), value = ""),
+                    textInput(inputId = ns("vueloClaveIn_input"), label = h3("Vuelo-In Clave"), value = ""),
                     hr(),
-                    verbatimTextOutput(outputId = ns("vueloClaveIn_salida"))
+                    verbatimTextOutput(outputId = ns("vueloClaveIn_output"))
                   )
                 ),
                 fluidRow(
                   column(
                     width = 3,
-                    dateInput(inputId = ns("vueloFechaOut_entrada"), label = h3("Vuelo-Out Fecha"), value = lubridate::today()),
+                    uiOutput(outputId = ns("vueloFechaOutAux_output")),
                     hr(),
-                    verbatimTextOutput(outputId = ns("vueloFechaOut_salida"))
+                    verbatimTextOutput(outputId = ns("vueloFechaOut_output"))
                   ),
                   column(
                     width = 3,
-                    textInput(inputId = ns("vueloHorarioOut_entrada"), label = h3("Vuelo-Out Horario"), value = ""),
+                    textInput(inputId = ns("vueloHorarioOut_input"), label = h3("Vuelo-Out Horario"), value = ""),
                     hr(),
-                    verbatimTextOutput(outputId = ns("vueloHorarioOut_salida"))
+                    verbatimTextOutput(outputId = ns("vueloHorarioOut_output"))
                   ),
                   column(
                     width = 3,
-                    textInput(inputId = ns("vueloClaveOut_entrada"), label = h3("Vuelo-Out Clave"), value = ""),
+                    textInput(inputId = ns("vueloClaveOut_input"), label = h3("Vuelo-Out Clave"), value = ""),
                     hr(),
-                    verbatimTextOutput(outputId = ns("vueloClaveOut_salida"))
+                    verbatimTextOutput(outputId = ns("vueloClaveOut_output"))
                   )
                 )
+              )
+            ),
+            fluidRow(
+              column(
+                width = 12,
+                hr(),
+                actionButton(inputId = ns("capturar_datosPrimerGrupo"), label = "Capturar")
               )
             )
           ),
@@ -296,7 +303,7 @@ mod_reservaciones_ui <- function(id){
               column(
                 width = 12,
                 hr(),
-                downloadButton(outputId = ns("boucher"), label = "Generar boucher", class = "leftAlign")
+                downloadButton(outputId = ns("boucher"), label = "Generar voucher", class = "leftAlign")
               )
             )
           )
@@ -317,50 +324,130 @@ mod_reservaciones_server <- function(id){
 
     ## Datos del pasajero -----------------------------------------------------
 
-    output$nombre_salida <- renderPrint({input$nombre_entrada})
+    observeEvent(input$capturar_datosPrimerGrupo, {
+      })
 
-    output$apellidoPa_salida <- renderPrint({input$apellidoPa_entrada})
+    nombre <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$nombre_input
+    })
 
-    output$apellidoMa_salida <- renderPrint({input$apellidoMa_entrada})
+    output$nombre_output <- renderPrint({nombre()})
 
-    output$pasajerosAdultos_salida <- renderPrint({input$pasajerosAdultos_entrada})
+    apellidoPa <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$apellidoPa_input
+    })
 
-    output$pasajerosMenores_salida <- renderPrint({input$pasajerosMenores_entrada})
+    output$apellidoPa_output <- renderPrint({apellidoPa()})
 
-    output$pasajerosInfantes_salida <- renderPrint({input$pasajerosInfantes_entrada})
+    apellidoMa <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$apellidoMa_input
+    })
 
-    output$pasajerosTotales_salida <- renderPrint({input$pasajerosAdultos_entrada +
-        input$pasajerosMenores_entrada +
-        input$pasajerosInfantes_entrada })
+    output$apellidoMa_output <- renderPrint({apellidoMa()})
+
+    pasajerosAdultos <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$pasajerosAdultos_input
+    })
+
+    output$pasajerosAdultos_output <- renderPrint({pasajerosAdultos()})
+
+    pasajerosMenores <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$pasajerosMenores_input
+    })
+
+    output$pasajerosMenores_output <- renderPrint({pasajerosMenores()})
+
+    pasajerosInfantes <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$pasajerosInfantes_input
+    })
+
+    output$pasajerosInfantes_output <- renderPrint({pasajerosInfantes()})
+
+    output$pasajerosTotales_output <- renderPrint({pasajerosAdultos() +
+        pasajerosMenores() +
+        pasajerosInfantes()})
 
     ## Datos de la agencia ----------------------------------------------------
 
-    output$agencia_salida <- renderPrint({input$agencia_entrada})
+    agencia <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$agencia_input
+    })
 
-    output$agente_salida <- renderPrint({input$agente_entrada})
+    output$agencia_output <- renderPrint({agencia()})
+
+    agente <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$agente_input
+    })
+
+    output$agente_output <- renderPrint({agente()})
 
     ## Fechas de entrada y salida ---------------------------------------------
 
-    output$fechaIn_salida <- renderPrint({input$fechaIn_entrada})
+    fechaIn <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$fechaIn_input
+    })
 
-    output$fechaOut_salida <- renderPrint({input$fechaOut_entrada})
+    output$fechaIn_output <- renderPrint({fechaIn()})
+
+    fechaIn_aux <- eventReactive(input$fechaIn_input, {
+      input$fechaIn_input
+    })
+
+    output$fechaOutAux_output <- renderUI({
+      dateInput(inputId = ns("fechaOut_input"), label = h3("Fecha-Out"), value = lubridate::as_date(fechaIn_aux()), min = lubridate::as_date(fechaIn_aux()))
+    })
+
+    fechaOut <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$fechaOut_input
+    })
+
+    output$fechaOut_output <- renderPrint({fechaOut()})
 
     ## Vuelos -----------------------------------------------------------------
 
-    output$vueloFechaIn_salida <- renderPrint({input$vueloFechaIn_entrada})
+    vueloFechaIn <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$vueloFechaIn_input
+    })
 
-    output$vueloHorarioIn_salida <- renderPrint({input$vueloHorarioIn_entrada})
+    output$vueloFechaIn_output <- renderPrint({vueloFechaIn()})
 
-    output$vueloClaveIn_salida <- renderPrint({input$vueloClaveIn_entrada})
+    vueloHorarioIn <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$vueloHorarioIn_input
+    })
 
-    output$vueloFechaOut_salida <- renderPrint({input$vueloFechaOut_entrada})
+    output$vueloHorarioIn_output <- renderPrint({vueloHorarioIn()})
 
-    output$vueloHorarioOut_salida <- renderPrint({input$vueloHorarioOut_entrada})
+    vueloClaveIn <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$vueloClaveIn_input
+    })
 
-    output$vueloClaveOut_salida <- renderPrint({input$vueloClaveOut_entrada})
+    output$vueloClaveIn_output <- renderPrint({vueloClaveIn()})
 
-    output$prueba_output <- renderPrint({input$prueba_input})
+    vueloFechaIn_aux <- eventReactive(input$vueloFechaIn_input, {
+      input$vueloFechaIn_input
+    })
 
+    output$vueloFechaOutAux_output <- renderUI({
+      dateInput(inputId = ns("vueloFechaOut_input"), label = h3("Vuelo-Out Fecha"), value = lubridate::as_date(vueloFechaIn_aux()), min = lubridate::as_date(vueloFechaIn_aux()))
+    })
+
+    vueloFechaOut <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$vueloFechaOut_input
+    })
+
+    output$vueloFechaOut_output <- renderPrint({vueloFechaOut()})
+
+    vueloHorarioOut <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$vueloHorarioOut_input
+    })
+
+    output$vueloHorarioOut_output <- renderPrint({vueloHorarioOut()})
+
+    vueloClaveOut <- eventReactive(input$capturar_datosPrimerGrupo, {
+      input$vueloClaveOut_input
+    })
+
+    output$vueloClaveOut_output <- renderPrint({vueloClaveOut()})
 
     # Hotel -------------------------------------------------------------------
 
