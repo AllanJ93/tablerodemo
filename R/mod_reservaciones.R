@@ -14,10 +14,6 @@ mod_reservaciones_ui <- function(id){
     fluidPage(
       h1("Reservaciones"),
       hr(),
-      # sidebarLayout(
-      #   sidebarPanel(
-      #     # Inputs excluded for brevity
-      #   ),
       mainPanel(
         tabsetPanel(
           tabPanel(
@@ -71,8 +67,6 @@ mod_reservaciones_ui <- function(id){
               column(
                 width = 3,
                 h3("Pasajeros totales"),
-                # textInput(inputId = ns("pasajerosTotales_entrada"), label = h3("Pasajeros totales"), value = ""),
-                # hr(),
                 verbatimTextOutput(outputId = ns("pasajerosTotales_salida")),
               )
             ),
@@ -101,12 +95,6 @@ mod_reservaciones_ui <- function(id){
                 width = 12,
                 h2("Fechas de entrada y salida"),
                 fluidRow(
-                  # column(
-                  #   width = 3,
-                  #   dateRangeInput(inputId = ns("fechaIn_entrada"), label = h3("Fecha-In"), min = lubridate::today()),
-                  #   hr(),
-                  #   verbatimTextOutput(outputId = ns("fechaIn_salida"))
-                  # ),
                   column(
                     width = 3,
                     dateInput(inputId = ns("fechaIn_entrada"), label = h3("Fecha-In"), value = lubridate::today()),
@@ -171,17 +159,149 @@ mod_reservaciones_ui <- function(id){
           ),
           tabPanel(title = "Datos (segundo grupo)",
                    hr(),
-                   textInput(inputId = ns("prueba_input"), label = h3("Text input"), value = "Enter text..."),
-                   fluidRow(
-                     column(
-                     width = 3,
-                     verbatimTextOutput(outputId = ns("prueba_output")))
+                   mainPanel(
+                     tabsetPanel(
+                       tabPanel(
+                         title = "Primer Hotel",
+                         hr(),
+                         fluidRow(
+                           column(
+                             width = 12,
+                             h2("Datos del Hotel"),
+                             fluidRow(
+                               column(
+                                 width = 3,
+                                 textInput(inputId = ns("hotelNombre_input"), label = h3("Hotel"), value = ""),
+                                 hr(),
+                                 verbatimTextOutput(outputId = ns("hotelNombre_output"))
+                               ),
+                               column(
+                                 width = 3,
+                                 dateInput(inputId = ns("hotelFechaLlegada_input"), label = h3("Fecha llegada"), value = lubridate::today()),
+                                 hr(),
+                                 verbatimTextOutput(outputId = ns("hotelFechaLlegada_output"))
+                               ),
+                               column(
+                                 width = 3,
+                                 dateInput(inputId = ns("hotelFechaSalida_input"), label = h3("Fecha salida"), value = lubridate::today()),
+                                 hr(),
+                                 verbatimTextOutput(outputId = ns("hotelFechaSalida_output"))
+                               ),
+                               column(
+                                 width = 3,
+                                 textInput(inputId = ns("hotelConfirmacion_input"), label = h3("Confirmación"), value = ""),
+                                 hr(),
+                                 verbatimTextOutput(outputId = ns("hotelConfirmacion_output"))
+                               )
+                             )
+                           )
+                         ),
+                         fluidRow(
+                           column(
+                             width = 12,
+                             h2("Habitaciones"),
+                             fluidRow(
+                               column(
+                                 width = 3,
+                                 numericInput(inputId = ns("hotelSgl_input"), label = h3("Single"), value = 0, min = 0),
+                                 hr(),
+                                 verbatimTextOutput(outputId = ns("hotelSgl_output"))
+                               ),
+                               column(
+                                 width = 3,
+                                 numericInput(inputId = ns("hotelDbl_input"), label = h3("Double"), value = 0, min = 0),
+                                 hr(),
+                                 verbatimTextOutput(outputId = ns("hotelDbl_output"))
+                               ),
+                               column(
+                                 width = 3,
+                                 numericInput(inputId = ns("hotelTpl_input"), label = h3("Triple"), value = 0, min = 0),
+                                 hr(),
+                                 verbatimTextOutput(outputId = ns("hotelTpl_output"))
+                               ),
+                               column(
+                                 width = 3,
+                                 numericInput(inputId = ns("hotelChd_input"), label = h3("Child"), value = 0, min = 0),
+                                 hr(),
+                                 verbatimTextOutput(outputId = ns("hotelChd_output"))
+                               )
+                             )
+                           )
+                         )
+                       )
+                     )
                    )
-                   ),
-          tabPanel("Datos (tercer grupo)", tableOutput("table"))
+          ),
+          tabPanel(
+            title = "Datos (tercer grupo)",
+            hr(),
+            fluidRow(
+              column(
+                width = 12,
+                h2("Rutas y servicios"),
+                fluidRow(
+                  column(
+                    width = 4,
+                    textInput(inputId = ns("ruta_input"), label = h3("Ruta"), value = ""),
+                    hr(),
+                    verbatimTextOutput(outputId = ns("ruta_output")
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    textInput(inputId = ns("observaciones_input"), label = h3("Observaciones"), value = ""),
+                    hr(),
+                    verbatimTextOutput(outputId = ns("observaciones_output")
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    textInput(inputId = ns("plan_input"), label = h3("Plan"), value = ""),
+                    hr(),
+                    verbatimTextOutput(outputId = ns("plan_output")
+                    )
+                  )
+                )
+              )
+            ),
+            fluidRow(
+              column(
+                width = 12,
+                fluidRow(
+                  column(
+                    width = 4,
+                    textInput(inputId = ns("costo_input"), label = h3("Costo"), value = ""),
+                    hr(),
+                    verbatimTextOutput(outputId = ns("costo_output")
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    textInput(inputId = ns("pago_input"), label = h3("Pago"), value = ""),
+                    hr(),
+                    verbatimTextOutput(outputId = ns("pago_output")
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    selectInput(inputId = ns("pagoConfirmacion_input"), label = h3("Pago confirmación"), choices = c("Confirmado", "Sin Confirmar"), selected = "", multiple = F),
+                    hr(),
+                    verbatimTextOutput(outputId = ns("pagoConfirmacion_output")
+                    )
+                  )
+                )
+              )
+            ),
+            fluidRow(
+              column(
+                width = 12,
+                hr(),
+                downloadButton(outputId = ns("boucher"), label = "Generar boucher", class = "leftAlign")
+              )
+            )
+          )
         )
       )
-      # )
     )
   )
 }
@@ -193,7 +313,9 @@ mod_reservaciones_server <- function(id){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
-    # Datos del pasajero ------------------------------------------------------
+    # Reservaciones -----------------------------------------------------------
+
+    ## Datos del pasajero -----------------------------------------------------
 
     output$nombre_salida <- renderPrint({input$nombre_entrada})
 
@@ -211,19 +333,19 @@ mod_reservaciones_server <- function(id){
         input$pasajerosMenores_entrada +
         input$pasajerosInfantes_entrada })
 
-    # Datos de la agencia -----------------------------------------------------
+    ## Datos de la agencia ----------------------------------------------------
 
     output$agencia_salida <- renderPrint({input$agencia_entrada})
 
     output$agente_salida <- renderPrint({input$agente_entrada})
 
-    # Fechas de entrada y salida ----------------------------------------------
+    ## Fechas de entrada y salida ---------------------------------------------
 
     output$fechaIn_salida <- renderPrint({input$fechaIn_entrada})
 
     output$fechaOut_salida <- renderPrint({input$fechaOut_entrada})
 
-    # Vuelos ------------------------------------------------------------------
+    ## Vuelos -----------------------------------------------------------------
 
     output$vueloFechaIn_salida <- renderPrint({input$vueloFechaIn_entrada})
 
@@ -238,6 +360,55 @@ mod_reservaciones_server <- function(id){
     output$vueloClaveOut_salida <- renderPrint({input$vueloClaveOut_entrada})
 
     output$prueba_output <- renderPrint({input$prueba_input})
+
+
+    # Hotel -------------------------------------------------------------------
+
+    ## Principal --------------------------------------------------------------
+
+    output$hotelNombre_output <- renderPrint({input$hotelNombre_input})
+
+    output$hotelFechaLlegada_output <- renderPrint({input$hotelFechaLlegada_input})
+
+    output$hotelFechaSalida_output <- renderPrint({input$hotelFechaSalida_input})
+
+    output$hotelConfirmacion_output <- renderPrint({input$hotelConfirmacion_input})
+
+    ## Adicionales ------------------------------------------------------------
+
+    output$hotelFechaAdicional_output <- renderPrint({input$hotelFechaAdicional_input})
+
+    output$hotelAdicional_output <- renderPrint({input$hotelAdicional_input})
+
+    ## Habitaciones ------------------------------------------------------------
+
+    output$hotelSgl_output <- renderPrint({input$hotelSgl_input})
+
+    output$hotelDbl_output <- renderPrint({input$hotelDbl_input})
+
+    output$hotelTpl_output <- renderPrint({input$hotelTpl_input})
+
+    output$hotelChd_output <- renderPrint({input$hotelChd_input})
+
+    # Rutas y servicios -------------------------------------------------------
+
+    ## Rutas ------------------------------------------------------------------
+
+    output$ruta_output <- renderPrint({input$ruta_input})
+
+    output$observaciones_output <- renderPrint({input$observaciones_input})
+
+    output$plan_output <- renderPrint({input$plan_input})
+
+    output$costo_output <- renderPrint({input$costo_input})
+
+    output$pago_output <- renderPrint({input$pago_input})
+
+    output$pagoConfirmacion_output <- renderPrint({input$pagoConfirmacion_input})
+
+
+
+
 
   })
 }
