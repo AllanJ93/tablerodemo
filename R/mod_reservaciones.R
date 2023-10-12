@@ -400,6 +400,8 @@ mod_reservaciones_server <- function(id){
 
     output$plan_output <- renderPrint({input$plan_input})
 
+    ## Servicios --------------------------------------------------------------
+
     output$costo_output <- renderPrint({input$costo_input})
 
     output$pago_output <- renderPrint({input$pago_input})
