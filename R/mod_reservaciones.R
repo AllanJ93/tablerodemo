@@ -162,6 +162,13 @@ mod_reservaciones_ui <- function(id){
                 hr(),
                 actionButton(inputId = ns("capturar_datosPrimerGrupo"), label = "Capturar")
               )
+            ),
+            fluidRow(
+              column(
+                width = 12,
+                hr(),
+                tableOutput(outputId = ns("datosPrimerGrupo_output"))
+              )
             )
           ),
           tabPanel(title = "Datos (segundo grupo)",
@@ -448,6 +455,33 @@ mod_reservaciones_server <- function(id){
     })
 
     output$vueloClaveOut_output <- renderPrint({vueloClaveOut()})
+
+    datosPrimerGrupo_aux <- eventReactive(input$capturar_datosPrimerGrupo, {
+
+      datos_primerGrupo <- tibble("nombre" = input$nombre_input,
+                                  "apellido_pa" = input$apellidoPa_input,
+                                  "apellido_ma" = input$apellidoMa_input,
+                                  "pasajeros_adultos" = input$pasajerosAdultos_input,
+                                  "pasajeros_menores" = input$pasajerosMenores_input,
+                                  "pasajeros_infantes" = input$pasajerosInfantes_input,
+                                  "pasajeros_totales" = input$pasajerosAdultos_input + input$pasajerosMenores_input + input$pasajerosInfantes_input,
+                                  "agencia" = input$agencia_input,
+                                  "agente" = input$agente_input,
+                                  "fecha_in" = input$fechaIn_input,
+                                  "fecha_out" = input$fechaOut_input,
+                                  "vuelo_in" = input$vueloFechaIn_input,
+                                  "vuelo_in_horario" = input$vueloHorarioIn_input,
+                                  "vuelo_in_clave" = input$vueloClaveIn_input,
+                                  "vuelo_out" = input$vueloFechaOut_input,
+                                  "vuelo_out_horario" = input$vueloHorarioOut_input,
+                                  "vuelo_out_clave" = input$vueloClaveOut_input)
+    })
+
+    output$datosPrimerGrupo_output <- renderTable({
+
+      datosPrimerGrupo_aux()
+
+    })
 
     # Hotel -------------------------------------------------------------------
 
