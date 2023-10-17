@@ -21,6 +21,9 @@ attachment::att_amend_desc()
 ## Add modules ----
 ## Create a module infrastructure in R/
 golem::add_module(name = "reservaciones", with_test = TRUE) # Name of the module
+golem::add_module(name = "datos_grupoUno", with_test = TRUE)
+golem::add_module(name = "datos_grupoDos", with_test = TRUE)
+golem::add_module(name = "datos_grupoTres", with_test = TRUE)
 golem::add_module(name = "operaciones", with_test = TRUE) # Name of the module
 golem::add_module(name = "status", with_test = TRUE) # Name of the module
 
