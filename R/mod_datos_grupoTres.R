@@ -72,6 +72,20 @@ mod_datos_grupoTres_ui <- function(id){
         column(
           width = 12,
           hr(),
+          actionButton(inputId = ns("capturar_datosTercerGrupo"), label = "Capturar")
+        )
+      ),
+      fluidRow(
+        column(
+          width = 12,
+          hr(),
+          tableOutput(outputId = ns("datosTercerGrupo_output"))
+        )
+      ),
+      fluidRow(
+        column(
+          width = 12,
+          hr(),
           downloadButton(outputId = ns("boucher"), label = "Generar voucher", class = "leftAlign")
         )
       )
@@ -86,21 +100,64 @@ mod_datos_grupoTres_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    ## Rutas ------------------------------------------------------------------
+    # Rutas -------------------------------------------------------------------
 
-    output$ruta_output <- renderPrint({input$ruta_input})
+    observeEvent(input$capturar_datosTercerGrupo, {
+    })
 
-    output$observaciones_output <- renderPrint({input$observaciones_input})
+    ruta <- eventReactive(input$capturar_datosTercerGrupo, {
+      input$ruta_input
+    })
 
-    output$plan_output <- renderPrint({input$plan_input})
+    output$ruta_output <- renderPrint({ruta()})
 
-    ## Servicios --------------------------------------------------------------
+    observaciones <- eventReactive(input$capturar_datosTercerGrupo, {
+      input$observaciones_input
+    })
 
-    output$costo_output <- renderPrint({input$costo_input})
+    output$observaciones_output <- renderPrint({observaciones()})
 
-    output$pago_output <- renderPrint({input$pago_input})
+    plan <- eventReactive(input$capturar_datosTercerGrupo, {
+      input$plan_input
+    })
 
-    output$pagoConfirmacion_output <- renderPrint({input$pagoConfirmacion_input})
+    output$plan_output <- renderPrint({plan()})
+
+    # Servicios ---------------------------------------------------------------
+
+    costo <- eventReactive(input$capturar_datosTercerGrupo, {
+      input$costo_input
+    })
+
+    output$costo_output <- renderPrint({costo()})
+
+    pago <- eventReactive(input$capturar_datosTercerGrupo, {
+      input$pago_input
+    })
+
+    output$pago_output <- renderPrint({pago()})
+
+    pagoConfirmacion <- eventReactive(input$capturar_datosTercerGrupo, {
+      input$pagoConfirmacion_input
+    })
+
+    output$pagoConfirmacion_output <- renderPrint({pagoConfirmacion()})
+
+    datosTercerGrupo_aux <- eventReactive(input$capturar_datosTercerGrupo, {
+
+      datos_tercerGrupo <- tibble("ruta" = input$ruta_input,
+                                  "observaciones" = input$observaciones_input,
+                                  "plan" = input$plan_input,
+                                  "costo" = input$costo_input,
+                                  "pago" = input$pago_input,
+                                  "pago_confirmacion" = input$pagoConfirmacion_input)
+    })
+
+    output$datosTercerGrupo_output <- renderTable({
+
+      datosTercerGrupo_aux()
+
+    })
 
   })
 }

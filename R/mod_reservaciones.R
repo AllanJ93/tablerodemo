@@ -19,7 +19,7 @@ mod_reservaciones_ui <- function(id){
           tabPanel(
             title = "Datos (primer grupo)",
             hr(),
-            mod_datos_grupoUno_ui("datos_grupoUno_1")
+            mod_datos_grupoUno_ui(ns("datos_grupoUno_1"))
           ),
           tabPanel(
             title = "Datos (segundo grupo)",
@@ -29,7 +29,7 @@ mod_reservaciones_ui <- function(id){
                 tabPanel(
                   title = "Primer Hotel",
                   hr(),
-                  mod_datos_grupoDos_ui("datos_grupoDos_1")
+                  mod_datos_grupoDos_ui(ns("datos_grupoDos_1"))
                 )
               )
             )
@@ -37,7 +37,7 @@ mod_reservaciones_ui <- function(id){
           tabPanel(
             title = "Datos (tercer grupo)",
             hr(),
-            mod_datos_grupoTres_ui("datos_grupoTres_1")
+            mod_datos_grupoTres_ui(ns("datos_grupoTres_1"))
           )
         )
       )

@@ -173,7 +173,7 @@ mod_datos_grupoUno_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    ## Datos del pasajero -----------------------------------------------------
+    # Datos del pasajero ------------------------------------------------------
 
     observeEvent(input$capturar_datosPrimerGrupo, {
     })
@@ -218,7 +218,7 @@ mod_datos_grupoUno_server <- function(id){
         pasajerosMenores() +
         pasajerosInfantes()})
 
-    ## Datos de la agencia ----------------------------------------------------
+    # Datos de la agencia -----------------------------------------------------
 
     agencia <- eventReactive(input$capturar_datosPrimerGrupo, {
       input$agencia_input
@@ -232,7 +232,7 @@ mod_datos_grupoUno_server <- function(id){
 
     output$agente_output <- renderPrint({agente()})
 
-    ## Fechas de entrada y salida ---------------------------------------------
+    # Fechas de entrada y salida ----------------------------------------------
 
     fechaIn <- eventReactive(input$capturar_datosPrimerGrupo, {
       input$fechaIn_input
@@ -245,7 +245,7 @@ mod_datos_grupoUno_server <- function(id){
     })
 
     output$fechaOutAux_output <- renderUI({
-      DateInput(inputId = ns("fechaOut_input"), label = h3("Fecha-Out"), value = lubridate::as_date(fechaIn_aux()), min = lubridate::as_date(fechaIn_aux()))
+      dateInput(inputId = ns("fechaOut_input"), label = h3("Fecha-Out"), value = lubridate::as_date(fechaIn_aux()), min = lubridate::as_date(fechaIn_aux()))
     })
 
     fechaOut <- eventReactive(input$capturar_datosPrimerGrupo, {
@@ -254,7 +254,7 @@ mod_datos_grupoUno_server <- function(id){
 
     output$fechaOut_output <- renderPrint({fechaOut()})
 
-    ## Vuelos -----------------------------------------------------------------
+    # Vuelos ------------------------------------------------------------------
 
     vueloFechaIn <- eventReactive(input$capturar_datosPrimerGrupo, {
       input$vueloFechaIn_input
